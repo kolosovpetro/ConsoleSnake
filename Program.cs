@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Threading;
 using ConsoleSnake.Auxiliaries;
 
 namespace ConsoleSnake
 {
     internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var snake = new Snake();
 

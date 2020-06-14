@@ -6,14 +6,18 @@ namespace ConsoleSnake.Auxiliaries
     internal class Snake
     {
         // position of snake
-        private readonly IPoint _position = new Point();
+        public IPoint Position { get; } = new Point();
 
         // instance of food
         private readonly Food _food = new Food();
 
+        // snake symbol
+        public string SnakeChar { get; set; }
+
         public Snake()
         {
             _food.ChangeFoodPosition();
+            SnakeChar = "*";
         }
 
         public void MoveX(int val)
@@ -22,8 +26,13 @@ namespace ConsoleSnake.Auxiliaries
             {
                 Console.Clear();
                 DisplaySnake();
-                _position.IncrementX(val);
+                Position.IncrementX(val);
                 _food.DisplayFood();
+                if (Position.X == _food.Position.X && Position.Y == _food.Position.Y)
+                {
+                    _food.ChangeFoodPosition();
+                    SnakeChar += "*";
+                }
                 Thread.Sleep(200);
             }
         }
@@ -34,21 +43,21 @@ namespace ConsoleSnake.Auxiliaries
             {
                 Console.Clear();
                 DisplaySnake();
-                _position.IncrementY(val);
+                Position.IncrementY(val);
                 _food.DisplayFood();
+                if (Position.X == _food.Position.X && Position.Y == _food.Position.Y)
+                {
+                    _food.ChangeFoodPosition();
+                    SnakeChar += "*";
+                }
                 Thread.Sleep(200);
             }
         }
 
         private void DisplaySnake()
         {
-            Console.SetCursorPosition(_position.X, _position.Y);
-            Console.Write(this);
-        }
-
-        public override string ToString()
-        {
-            return "*";
+            Console.SetCursorPosition(Position.X, Position.Y);
+            Console.Write(SnakeChar);
         }
     }
 }

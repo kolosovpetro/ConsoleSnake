@@ -5,7 +5,7 @@ namespace ConsoleSnake.Auxiliaries
     internal class Food
     {
         // position of food
-        private readonly IPoint _foodPosition = new Point();
+        public IPoint Position { get; } = new Point();
 
         // random instance
         private readonly Random _random = new Random();
@@ -13,7 +13,7 @@ namespace ConsoleSnake.Auxiliaries
         // reset food position
         public void ResetPosition()
         {
-            _foodPosition.Reset();
+            Position.Reset();
         }
 
         // Generate new coordinates for food
@@ -27,14 +27,14 @@ namespace ConsoleSnake.Auxiliaries
         // set new coordinates
         public void ChangeFoodPosition()
         {
-            _foodPosition.X = GenerateCoordinates().Item1;
-            _foodPosition.Y = GenerateCoordinates().Item2;
+            Position.X = GenerateCoordinates().Item1;
+            Position.Y = GenerateCoordinates().Item2;
         }
 
         // display food
         public void DisplayFood()
         {
-            Console.SetCursorPosition(_foodPosition.X, _foodPosition.Y);
+            Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write(this);
         }
 

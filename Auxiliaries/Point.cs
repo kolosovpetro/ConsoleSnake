@@ -20,5 +20,10 @@
             X = 0;
             Y = 0;
         }
+
+        public override string ToString()
+        {
+            return "*";
+        }
     }
 }
