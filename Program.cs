@@ -30,24 +30,40 @@ namespace ConsoleSnake
                     switch (command)
                     {
                         case ConsoleKey.DownArrow:
-                            Console.Clear();
-                            snake.MoveSnakeY(1);
-                            snake.PrintSnake();
+                            while (!Console.KeyAvailable)
+                            {
+                                Console.Clear();
+                                snake.MoveSnakeY(1);
+                                snake.PrintSnake();
+                                Thread.Sleep(344);
+                            }
                             break;
                         case ConsoleKey.UpArrow:
-                            Console.Clear();
-                            snake.MoveSnakeY(-1);
-                            snake.PrintSnake();
+                            while (!Console.KeyAvailable)
+                            {
+                                Console.Clear();
+                                snake.MoveSnakeY(-1);
+                                snake.PrintSnake();
+                                Thread.Sleep(344);
+                            }
                             break;
                         case ConsoleKey.LeftArrow:
-                            Console.Clear();
-                            snake.MoveSnakeX(-1);
-                            snake.PrintSnake();
+                            while (!Console.KeyAvailable)
+                            {
+                                Console.Clear();
+                                snake.MoveSnakeX(-1);
+                                snake.PrintSnake();
+                                Thread.Sleep(344);
+                            }
                             break;
                         case ConsoleKey.RightArrow:
-                            Console.Clear();
-                            snake.MoveSnakeX(1);
-                            snake.PrintSnake();
+                            while (!Console.KeyAvailable)
+                            {
+                                Console.Clear();
+                                snake.MoveSnakeX(1);
+                                snake.PrintSnake();
+                                Thread.Sleep(344);
+                            }
                             break;
                     }
                 }
