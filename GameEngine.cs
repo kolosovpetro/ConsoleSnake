@@ -15,75 +15,57 @@ namespace ConsoleSnake
                 if (Console.KeyAvailable)
                 {
                     var command = Console.ReadKey().Key;
-
                     switch (command)
                     {
                         case ConsoleKey.DownArrow:
-                            while (!Console.KeyAvailable)
-                            {
-                                Console.Clear();
-                                _snake.MoveSnakeY(1);
-                                _snake.PrintSnake();
-                                _food.DisplayFood();
-                                if (_snake.X == _food.X && _snake.Y == _food.Y)
-                                {
-                                    _food.ChangeFoodPosition();
-                                    _snake.AddTailY(1);
-                                }
-                                Thread.Sleep(344);
-                            }
-
+                            VerticalMove(1);
                             break;
                         case ConsoleKey.UpArrow:
-                            while (!Console.KeyAvailable)
-                            {
-                                Console.Clear();
-                                _snake.MoveSnakeY(-1);
-                                _snake.PrintSnake();
-                                _food.DisplayFood();
-                                if (_snake.X == _food.X && _snake.Y == _food.Y)
-                                {
-                                    _food.ChangeFoodPosition();
-                                    _snake.AddTailY(-1);
-                                }
-                                Thread.Sleep(344);
-                            }
-
+                            VerticalMove(-1);
                             break;
                         case ConsoleKey.LeftArrow:
-                            while (!Console.KeyAvailable)
-                            {
-                                Console.Clear();
-                                _snake.MoveSnakeX(-1);
-                                _snake.PrintSnake();
-                                _food.DisplayFood();
-                                if (_snake.X == _food.X && _snake.Y == _food.Y)
-                                {
-                                    _food.ChangeFoodPosition();
-                                    _snake.AddTailX(-1);
-                                }
-                                Thread.Sleep(344);
-                            }
-
+                            HorizontalMove(-1);
                             break;
                         case ConsoleKey.RightArrow:
-                            while (!Console.KeyAvailable)
-                            {
-                                Console.Clear();
-                                _snake.MoveSnakeX(1);
-                                _snake.PrintSnake();
-                                _food.DisplayFood();
-                                if (_snake.X == _food.X && _snake.Y == _food.Y)
-                                {
-                                    _food.ChangeFoodPosition();
-                                    _snake.AddTailX(1);
-                                }
-                                Thread.Sleep(344);
-                            }
-
+                            HorizontalMove(1);
                             break;
                     }
                 }
+            }
+        }
+
+        private void HorizontalMove(int value)
+        {
+            while (!Console.KeyAvailable)
+            {
+                Console.Clear();
+                _snake.MoveSnakeX(value);
+                _snake.PrintSnake();
+                _food.DisplayFood();
+                if (_snake.X == _food.X && _snake.Y == _food.Y)
+                {
+                    _food.ChangeFoodPosition();
+                    _snake.AddTailX(value);
+                }
+
+                Thread.Sleep(150);
+            }
+        }
+
+        private void VerticalMove(int value)
+        {
+            while (!Console.KeyAvailable)
+            {
+                Console.Clear();
+                _snake.MoveSnakeY(value);
+                _snake.PrintSnake();
+                _food.DisplayFood();
+                if (_snake.X == _food.X && _snake.Y == _food.Y)
+                {
+                    _food.ChangeFoodPosition();
+                    _snake.AddTailY(value);
+                }
+                Thread.Sleep(150);
             }
         }
     }
