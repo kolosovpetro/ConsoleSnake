@@ -2,8 +2,8 @@
 {
     internal class Point : IPoint
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public void IncrementX(int val)
         {
@@ -13,6 +13,12 @@
         public void IncrementY(int val)
         {
             Y += val;
+        }
+
+        public void Reset()
+        {
+            X = 0;
+            Y = 0;
         }
     }
 }
