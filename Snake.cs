@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ConsoleSnake.Auxiliaries
+namespace ConsoleSnake
 {
     internal class Snake
     {

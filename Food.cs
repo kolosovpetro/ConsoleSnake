@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleSnake.Auxiliaries
+namespace ConsoleSnake
 {
     internal class Food
     {

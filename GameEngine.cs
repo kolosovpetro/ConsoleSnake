@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ConsoleSnake.Auxiliaries
+namespace ConsoleSnake
 {
     internal class GameEngine
     {
