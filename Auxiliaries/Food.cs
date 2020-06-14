@@ -10,6 +10,10 @@ namespace ConsoleSnake.Auxiliaries
         // random instance
         private readonly Random _random = new Random();
 
+        // get coordinates
+        public int X => Position.X;
+        public int Y => Position.Y;
+
         public Food()
         {
             ChangeFoodPosition();

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 
 namespace ConsoleSnake.Auxiliaries
 {
@@ -11,6 +9,10 @@ namespace ConsoleSnake.Auxiliaries
 
         // get snake length
         public int Length => SnakeBody.Count;
+
+        // get head coordinates
+        public int X => SnakeBody[0].X;
+        public int Y => SnakeBody[0].Y;
 
         public Snake()
         {
@@ -51,6 +53,20 @@ namespace ConsoleSnake.Auxiliaries
             // get next based on head
             next = new Point(next.X, next.Y + val);
             SnakeBody.Insert(0, next);
+        }
+
+        public void AddTailX(int val)
+        {
+            var currentTail = SnakeBody[Length - 1];
+            currentTail = new Point(currentTail.X + val, currentTail.Y);
+            SnakeBody.Insert(Length - 1, currentTail);
+        }
+
+        public void AddTailY(int val)
+        {
+            var currentTail = SnakeBody[Length - 1];
+            currentTail = new Point(currentTail.X, currentTail.Y + val);
+            SnakeBody.Insert(Length - 1, currentTail);
         }
     }
 }
