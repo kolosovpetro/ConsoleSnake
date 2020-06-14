@@ -10,6 +10,11 @@ namespace ConsoleSnake.Auxiliaries
         // random instance
         private readonly Random _random = new Random();
 
+        public Food()
+        {
+            ChangeFoodPosition();
+        }
+
         // reset food position
         public void ResetPosition()
         {

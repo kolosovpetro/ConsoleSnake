@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using ConsoleSnake.Auxiliaries;
 
@@ -10,16 +9,7 @@ namespace ConsoleSnake
         private static void Main()
         {
             var snake = new Snake();
-
-            //int t = 0;
-            //while (t < 20)
-            //{
-            //    snake.PrintSnake();
-            //    snake.MoveSnakeX(1);
-            //    t++;
-            //    Thread.Sleep(200);
-            //    Console.Clear();
-            //}
+            var food = new Food();
 
             while (true)
             {
@@ -35,6 +25,7 @@ namespace ConsoleSnake
                                 Console.Clear();
                                 snake.MoveSnakeY(1);
                                 snake.PrintSnake();
+                                food.DisplayFood();
                                 Thread.Sleep(344);
                             }
                             break;
@@ -44,6 +35,7 @@ namespace ConsoleSnake
                                 Console.Clear();
                                 snake.MoveSnakeY(-1);
                                 snake.PrintSnake();
+                                food.DisplayFood();
                                 Thread.Sleep(344);
                             }
                             break;
@@ -53,6 +45,7 @@ namespace ConsoleSnake
                                 Console.Clear();
                                 snake.MoveSnakeX(-1);
                                 snake.PrintSnake();
+                                food.DisplayFood();
                                 Thread.Sleep(344);
                             }
                             break;
@@ -62,6 +55,7 @@ namespace ConsoleSnake
                                 Console.Clear();
                                 snake.MoveSnakeX(1);
                                 snake.PrintSnake();
+                                food.DisplayFood();
                                 Thread.Sleep(344);
                             }
                             break;
