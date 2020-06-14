@@ -1,63 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ConsoleSnake.Auxiliaries
 {
     internal class Snake
     {
-        // position of snake
-        public IPoint Position { get; } = new Point();
+        // snake body
+        public List<Point> SnakeBody { get; } = new List<Point>();
 
-        // instance of food
-        private readonly Food _food = new Food();
-
-        // snake symbol
-        public string SnakeChar { get; set; }
+        // get snake length
+        public int Length => SnakeBody.Count;
 
         public Snake()
         {
-            _food.ChangeFoodPosition();
-            SnakeChar = "*";
+            InitializeBody();
         }
 
-        public void MoveX(int val)
+        // initialize snake body
+        public void InitializeBody()
         {
-            while (!Console.KeyAvailable)
-            {
-                Console.Clear();
-                DisplaySnake();
-                Position.IncrementX(val);
-                _food.DisplayFood();
-                if (Position.X == _food.Position.X && Position.Y == _food.Position.Y)
-                {
-                    _food.ChangeFoodPosition();
-                    SnakeChar += "*";
-                }
-                Thread.Sleep(200);
-            }
+            for (int i = 0; i < 5; i++)
+                SnakeBody.Add(new Point(5, 2 + i));
         }
 
-        public void MoveY(int val)
+        // print snake
+        public void PrintSnake()
         {
-            while (!Console.KeyAvailable)
-            {
-                Console.Clear();
-                DisplaySnake();
-                Position.IncrementY(val);
-                _food.DisplayFood();
-                if (Position.X == _food.Position.X && Position.Y == _food.Position.Y)
-                {
-                    _food.ChangeFoodPosition();
-                    SnakeChar += "*";
-                }
-                Thread.Sleep(200);
-            }
+            foreach (var point in SnakeBody)
+                point.PrintPoint();
         }
 
-        private void DisplaySnake()
+        public void MoveSnakeX(int val)
         {
-            Console.SetCursorPosition(Position.X, Position.Y);
-            Console.Write(SnakeChar);
+            // remove tail element
+            SnakeBody.RemoveAt(Length - 1);
+            // get head
+            var next = SnakeBody[0];
+            // get next based on head
+            next = new Point(next.X + val, next.Y);
+            SnakeBody.Insert(0, next);
+        }
+
+        public void MoveSnakeY(int val)
+        {
+            // remove tail element
+            SnakeBody.RemoveAt(Length - 1);
+            // get head
+            var next = SnakeBody[0];
+            // get next based on head
+            next = new Point(next.X, next.Y + val);
+            SnakeBody.Insert(0, next);
         }
     }
 }

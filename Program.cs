@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using ConsoleSnake.Auxiliaries;
 
 namespace ConsoleSnake
@@ -9,6 +11,15 @@ namespace ConsoleSnake
         {
             var snake = new Snake();
 
+            //int t = 0;
+            //while (t < 20)
+            //{
+            //    snake.PrintSnake();
+            //    snake.MoveSnakeX(1);
+            //    t++;
+            //    Thread.Sleep(200);
+            //    Console.Clear();
+            //}
 
             while (true)
             {
@@ -19,21 +30,28 @@ namespace ConsoleSnake
                     switch (command)
                     {
                         case ConsoleKey.DownArrow:
-                            snake.MoveY(1);
+                            Console.Clear();
+                            snake.MoveSnakeY(1);
+                            snake.PrintSnake();
                             break;
                         case ConsoleKey.UpArrow:
-                            snake.MoveY(-1);
+                            Console.Clear();
+                            snake.MoveSnakeY(-1);
+                            snake.PrintSnake();
                             break;
                         case ConsoleKey.LeftArrow:
-                            snake.MoveX(-1);
+                            Console.Clear();
+                            snake.MoveSnakeX(-1);
+                            snake.PrintSnake();
                             break;
                         case ConsoleKey.RightArrow:
-                            snake.MoveX(1);
+                            Console.Clear();
+                            snake.MoveSnakeX(1);
+                            snake.PrintSnake();
                             break;
                     }
                 }
             }
-
         }
     }
 }

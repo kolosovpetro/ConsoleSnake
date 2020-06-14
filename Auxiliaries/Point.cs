@@ -1,9 +1,21 @@
-﻿namespace ConsoleSnake.Auxiliaries
+﻿using System;
+
+namespace ConsoleSnake.Auxiliaries
 {
-    internal class Point : IPoint
+    internal class Point
     {
         public int X { get; set; }
         public int Y { get; set; }
+
+        public Point()
+        {
+        }
+
+        public Point(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
 
         public void IncrementX(int val)
         {
@@ -19,6 +31,12 @@
         {
             X = 0;
             Y = 0;
+        }
+
+        public void PrintPoint()
+        {
+            Console.SetCursorPosition(X, Y);
+            Console.Write(this);
         }
 
         public override string ToString()

@@ -5,7 +5,7 @@ namespace ConsoleSnake.Auxiliaries
     internal class Food
     {
         // position of food
-        public IPoint Position { get; } = new Point();
+        public Point Position { get; } = new Point();
 
         // random instance
         private readonly Random _random = new Random();
