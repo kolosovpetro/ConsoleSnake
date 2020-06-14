@@ -5,10 +5,10 @@ namespace ConsoleSnake
     internal class Snake
     {
         // snake body
-        public List<Point> SnakeBody { get; } = new List<Point>();
+        private List<Point> SnakeBody { get; } = new List<Point>();
 
         // get snake length
-        public int Length => SnakeBody.Count;
+        private int Length => SnakeBody.Count;
 
         // get head coordinates
         public int X => SnakeBody[0].X;
@@ -20,7 +20,7 @@ namespace ConsoleSnake
         }
 
         // initialize snake body
-        public void InitializeBody()
+        private void InitializeBody()
         {
             for (int i = 0; i < 5; i++)
                 SnakeBody.Add(new Point(5, 2 + i));

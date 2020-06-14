@@ -17,16 +17,6 @@ namespace ConsoleSnake
             Y = y;
         }
 
-        public void IncrementX(int val)
-        {
-            X += val;
-        }
-
-        public void IncrementY(int val)
-        {
-            Y += val;
-        }
-
         public void Reset()
         {
             X = 0;

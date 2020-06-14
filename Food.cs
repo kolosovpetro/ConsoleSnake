@@ -5,10 +5,10 @@ namespace ConsoleSnake
     internal class Food
     {
         // position of food
-        public Point Position { get; } = new Point();
+        private Point Position { get; } = new Point();
 
         // random instance
-        private readonly Random _random = new Random();
+        private Random Random { get; }  = new Random();
 
         // get coordinates
         public int X => Position.X;
@@ -19,17 +19,11 @@ namespace ConsoleSnake
             ChangeFoodPosition();
         }
 
-        // reset food position
-        public void ResetPosition()
-        {
-            Position.Reset();
-        }
-
         // Generate new coordinates for food
-        public (int, int) GenerateCoordinates()
+        private (int, int) GenerateCoordinates()
         {
-            int newX = _random.Next(20);
-            int newY = _random.Next(20);
+            var newX = Random.Next(20);
+            var newY = Random.Next(20);
             return new ValueTuple<int, int>(newX, newY);
         }
 

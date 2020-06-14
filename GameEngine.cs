@@ -5,8 +5,8 @@ namespace ConsoleSnake
 {
     internal class GameEngine
     {
-        private readonly Snake _snake = new Snake();
-        private readonly Food _food = new Food();
+        private Snake Snake { get; } = new Snake();
+        private Food Food { get; } = new Food();
 
         public void GameProcess()
         {
@@ -23,11 +23,11 @@ namespace ConsoleSnake
                         case ConsoleKey.UpArrow:
                             VerticalMove(-1);
                             break;
-                        case ConsoleKey.LeftArrow:
-                            HorizontalMove(-1);
-                            break;
                         case ConsoleKey.RightArrow:
                             HorizontalMove(1);
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            HorizontalMove(-1);
                             break;
                     }
                 }
@@ -39,13 +39,14 @@ namespace ConsoleSnake
             while (!Console.KeyAvailable)
             {
                 Console.Clear();
-                _snake.MoveSnakeX(value);
-                _snake.PrintSnake();
-                _food.DisplayFood();
-                if (_snake.X == _food.X && _snake.Y == _food.Y)
+                Snake.MoveSnakeX(value);
+                Snake.PrintSnake();
+                Food.DisplayFood();
+
+                if (Snake.X == Food.X && Snake.Y == Food.Y)
                 {
-                    _food.ChangeFoodPosition();
-                    _snake.AddTailX(value);
+                    Food.ChangeFoodPosition();
+                    Snake.AddTailX(value);
                 }
 
                 Thread.Sleep(150);
@@ -57,14 +58,16 @@ namespace ConsoleSnake
             while (!Console.KeyAvailable)
             {
                 Console.Clear();
-                _snake.MoveSnakeY(value);
-                _snake.PrintSnake();
-                _food.DisplayFood();
-                if (_snake.X == _food.X && _snake.Y == _food.Y)
+                Snake.MoveSnakeY(value);
+                Snake.PrintSnake();
+                Food.DisplayFood();
+
+                if (Snake.X == Food.X && Snake.Y == Food.Y)
                 {
-                    _food.ChangeFoodPosition();
-                    _snake.AddTailY(value);
+                    Food.ChangeFoodPosition();
+                    Snake.AddTailY(value);
                 }
+
                 Thread.Sleep(150);
             }
         }
