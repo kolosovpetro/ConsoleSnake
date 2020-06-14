@@ -29,6 +29,8 @@ namespace ConsoleSnake
                             snake.MoveX(-1);
                             break;
                         case ConsoleKey.RightArrow:
+                            Console.SetCursorPosition(20,20);
+                            Console.Write("*");
                             snake.MoveX(1);
                             break;
                     }

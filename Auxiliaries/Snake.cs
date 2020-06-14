@@ -5,13 +5,8 @@ namespace ConsoleSnake.Auxiliaries
 {
     internal class Snake
     {
-        private readonly IPoint _position;
-        private string _snake = "*";
-
-        public Snake()
-        {
-            _position = new Point();
-        }
+        // position of snake
+        private readonly IPoint _position = new Point();
 
         public void MoveX(int val)
         {
@@ -19,7 +14,7 @@ namespace ConsoleSnake.Auxiliaries
             {
                 Console.Clear();
                 Console.SetCursorPosition(_position.X, _position.Y);
-                Console.Write(_snake);
+                Console.Write(this);
                 _position.IncrementX(val);
                 Thread.Sleep(200);
             }
@@ -31,10 +26,15 @@ namespace ConsoleSnake.Auxiliaries
             {
                 Console.Clear();
                 Console.SetCursorPosition(_position.X, _position.Y);
-                Console.Write(_snake);
+                Console.Write(this);
                 _position.IncrementY(val);
                 Thread.Sleep(200);
             }
+        }
+
+        public override string ToString()
+        {
+            return "*";
         }
     }
 }
