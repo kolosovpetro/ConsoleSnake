@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using ConsoleSnake.Exceptions;
 
 namespace ConsoleSnake
@@ -10,6 +9,7 @@ namespace ConsoleSnake
         // snake body
         public List<Point> SnakeBody { get; } = new List<Point>();
         public Point Head => SnakeBody[0];
+        public Point Tail => SnakeBody[Length - 1];
 
         // get snake length
         private int Length => SnakeBody.Count;
@@ -37,12 +37,12 @@ namespace ConsoleSnake
             {
                 if (SnakeBody.IndexOf(point) == 0)
                 {
-                    // this if makes head of snake to be red
+                    // this if makes head of snake to be colored
                     point.PrintPoint(ConsoleColor.DarkMagenta);
                     continue;
                 }
 
-                point.PrintPoint();
+                point.PrintPoint(ConsoleColor.Gray);
             }
         }
 
@@ -64,28 +64,26 @@ namespace ConsoleSnake
             SnakeBody.Insert(0, next);
         }
 
+        private void RemoveTail()
+        {
+            SnakeBody.RemoveAt(Length - 1);
+        }
+
         public void AddTailX(int val)
         {
-            var currentTail = SnakeBody[Length - 1];
-            currentTail = new Point(currentTail.X + val, currentTail.Y);
-            SnakeBody.Insert(Length - 1, currentTail);
+            var tail = new Point(Tail.X + val, Tail.Y);
+            SnakeBody.Insert(Length - 1, tail);
         }
 
         public void AddTailY(int val)
         {
-            var currentTail = SnakeBody[Length - 1];
-            currentTail = new Point(currentTail.X, currentTail.Y + val);
-            SnakeBody.Insert(Length - 1, currentTail);
+            var tail = new Point(Tail.X, Tail.Y + val);
+            SnakeBody.Insert(Length - 1, tail);
         }
 
         public bool LegalMove(Point point)
         {
             return !SnakeBody.Contains(point);
-        }
-
-        private void RemoveTail()
-        {
-            SnakeBody.RemoveAt(Length - 1);
         }
     }
 }

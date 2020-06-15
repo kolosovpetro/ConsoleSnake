@@ -17,19 +17,6 @@ namespace ConsoleSnake
             Y = y;
         }
 
-        public void Reset()
-        {
-            X = 0;
-            Y = 0;
-        }
-
-        // may be removed in future. Use only other overload
-        public void PrintPoint()
-        {
-            Console.SetCursorPosition(X, Y);
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write(ToString(), Console.ForegroundColor);
-        }
 
         public void PrintPoint(ConsoleColor color)
         {

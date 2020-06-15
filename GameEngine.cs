@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
-using ConsoleSnake.Exceptions;
 
 namespace ConsoleSnake
 {
     internal class GameEngine
     {
         private Snake Snake { get; } = new Snake();
-        private Point Head => Snake.SnakeBody[0];
         private Food Food { get; } = new Food();
         private int PlayerCount { get; set; }
 
@@ -60,11 +57,9 @@ namespace ConsoleSnake
                     PlayerCount++;
                     UpdateCount();
                     Food.ChangeFoodPosition();
-                    // here is check for food position
+                    // this is to check that food won't appear inside snake's body
                     while (Snake.SnakeBody.Contains(Food.Position))
-                    {
                         Food.ChangeFoodPosition();
-                    }
                     Snake.AddTailX(value);
                 }
 
@@ -86,11 +81,9 @@ namespace ConsoleSnake
                     PlayerCount++;
                     UpdateCount();
                     Food.ChangeFoodPosition();
-                    // here is check for food position
+                    // this is to check that food won't appear inside snake's body
                     while (Snake.SnakeBody.Contains(Food.Position))
-                    {
                         Food.ChangeFoodPosition();
-                    }
                     Snake.AddTailY(value);
                 }
 
