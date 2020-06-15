@@ -8,7 +8,7 @@ namespace ConsoleSnake
         private Point Position { get; } = new Point();
 
         // random instance
-        private Random Random { get; }  = new Random();
+        private Random Random { get; } = new Random();
 
         // get coordinates
         public int X => Position.X;
@@ -38,7 +38,8 @@ namespace ConsoleSnake
         public void DisplayFood()
         {
             Console.SetCursorPosition(Position.X, Position.Y);
-            Console.Write(this);
+            Console.ForegroundColor = ConsoleColor.Cyan; 
+            Console.Write(ToString(), Console.ForegroundColor);
         }
 
         public override string ToString()

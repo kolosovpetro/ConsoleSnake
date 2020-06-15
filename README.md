@@ -5,7 +5,7 @@ Snake game console implementation using C#
 ### To implement in addition
 
 - Score count
-- Exceptiions where user goes over field, when snake touches itself
+- Exceptiions when user goes over field, when snake touches itself
 - Fix and border the table
 - Make food to be different color
 

@@ -7,12 +7,14 @@ namespace ConsoleSnake
     {
         private Snake Snake { get; } = new Snake();
         private Food Food { get; } = new Food();
+        private int PlayerCount { get; set; }
 
         public void GameProcess()
         {
             Console.WriteLine("Press any key to start");
-            Snake.DisplaySnake();
+            UpdateCount();
             Food.DisplayFood();
+            Snake.DisplaySnake();
 
             while (true)
             {
@@ -47,11 +49,13 @@ namespace ConsoleSnake
             {
                 Console.Clear();
                 Snake.MoveSnakeX(value);
-                Snake.DisplaySnake();
                 Food.DisplayFood();
+                Snake.DisplaySnake();
 
                 if (Snake.X == Food.X && Snake.Y == Food.Y)
                 {
+                    PlayerCount++;
+                    UpdateCount();
                     Food.ChangeFoodPosition();
                     Snake.AddTailX(value);
                 }
@@ -66,17 +70,24 @@ namespace ConsoleSnake
             {
                 Console.Clear();
                 Snake.MoveSnakeY(value);
-                Snake.DisplaySnake();
                 Food.DisplayFood();
+                Snake.DisplaySnake();
 
                 if (Snake.X == Food.X && Snake.Y == Food.Y)
                 {
+                    PlayerCount++;
+                    UpdateCount();
                     Food.ChangeFoodPosition();
                     Snake.AddTailY(value);
                 }
 
                 Thread.Sleep(150);
             }
+        }
+
+        private void UpdateCount()
+        {
+            Console.Title = $"Snake game. Current count: {PlayerCount}";
         }
     }
 }

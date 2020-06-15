@@ -26,7 +26,8 @@ namespace ConsoleSnake
         public void PrintPoint()
         {
             Console.SetCursorPosition(X, Y);
-            Console.Write(this);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(ToString(), Console.ForegroundColor);
         }
 
         public override string ToString()
