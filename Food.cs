@@ -5,7 +5,7 @@ namespace ConsoleSnake
     internal class Food
     {
         // position of food
-        private Point Position { get; } = new Point();
+        public Point Position { get; } = new Point();
 
         // random instance
         private Random Random { get; } = new Random();

@@ -6,7 +6,7 @@ namespace ConsoleSnake
     internal class Snake
     {
         // snake body
-        private List<Point> SnakeBody { get; } = new List<Point>();
+        public List<Point> SnakeBody { get; } = new List<Point>();
 
         // get snake length
         private int Length => SnakeBody.Count;

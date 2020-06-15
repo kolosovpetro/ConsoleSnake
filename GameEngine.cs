@@ -57,6 +57,11 @@ namespace ConsoleSnake
                     PlayerCount++;
                     UpdateCount();
                     Food.ChangeFoodPosition();
+                    // here is check for food position
+                    while (Snake.SnakeBody.Contains(Food.Position))
+                    {
+                        Food.ChangeFoodPosition();
+                    }
                     Snake.AddTailX(value);
                 }
 
@@ -78,6 +83,11 @@ namespace ConsoleSnake
                     PlayerCount++;
                     UpdateCount();
                     Food.ChangeFoodPosition();
+                    // here is check for food position
+                    while (Snake.SnakeBody.Contains(Food.Position))
+                    {
+                        Food.ChangeFoodPosition();
+                    }
                     Snake.AddTailY(value);
                 }
 

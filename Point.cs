@@ -2,7 +2,7 @@
 
 namespace ConsoleSnake
 {
-    internal class Point
+    internal class Point : IEquatable<Point>
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -23,13 +23,14 @@ namespace ConsoleSnake
             Y = 0;
         }
 
+        // may be removed in future. Use only other overload
         public void PrintPoint()
         {
             Console.SetCursorPosition(X, Y);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(ToString(), Console.ForegroundColor);
         }
-        
+
         public void PrintPoint(ConsoleColor color)
         {
             Console.SetCursorPosition(X, Y);
@@ -37,7 +38,12 @@ namespace ConsoleSnake
             Console.Write(ToString(), Console.ForegroundColor);
         }
 
-
+        public bool Equals(Point other)
+        {
+            if (other == null)
+                return false;
+            return X.Equals(other.X) && Y.Equals(other.Y);
+        }
 
         public override string ToString()
         {
