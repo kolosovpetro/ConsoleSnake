@@ -29,6 +29,15 @@ namespace ConsoleSnake
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write(ToString(), Console.ForegroundColor);
         }
+        
+        public void PrintPoint(ConsoleColor color)
+        {
+            Console.SetCursorPosition(X, Y);
+            Console.ForegroundColor = color;
+            Console.Write(ToString(), Console.ForegroundColor);
+        }
+
+
 
         public override string ToString()
         {

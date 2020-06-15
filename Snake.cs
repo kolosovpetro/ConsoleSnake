@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleSnake
 {
@@ -30,7 +31,16 @@ namespace ConsoleSnake
         public void DisplaySnake()
         {
             foreach (var point in SnakeBody)
+            {
+                if (SnakeBody.IndexOf(point) == 0)
+                {
+                    // this if makes head of snake to be red
+                    point.PrintPoint(ConsoleColor.DarkMagenta);
+                    continue;
+                }
+
                 point.PrintPoint();
+            }
         }
 
         public void MoveSnakeX(int val)
