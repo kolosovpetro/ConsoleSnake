@@ -27,7 +27,7 @@ namespace ConsoleSnake
         }
 
         // print snake
-        public void PrintSnake()
+        public void DisplaySnake()
         {
             foreach (var point in SnakeBody)
                 point.PrintPoint();

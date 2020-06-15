@@ -10,6 +10,10 @@ namespace ConsoleSnake
 
         public void GameProcess()
         {
+            Console.WriteLine("Press any key to start");
+            Snake.DisplaySnake();
+            Food.DisplayFood();
+
             while (true)
             {
                 if (Console.KeyAvailable)
@@ -29,6 +33,9 @@ namespace ConsoleSnake
                         case ConsoleKey.LeftArrow:
                             HorizontalMove(-1);
                             break;
+                        default:
+                            HorizontalMove(1);
+                            break;
                     }
                 }
             }
@@ -40,7 +47,7 @@ namespace ConsoleSnake
             {
                 Console.Clear();
                 Snake.MoveSnakeX(value);
-                Snake.PrintSnake();
+                Snake.DisplaySnake();
                 Food.DisplayFood();
 
                 if (Snake.X == Food.X && Snake.Y == Food.Y)
@@ -59,7 +66,7 @@ namespace ConsoleSnake
             {
                 Console.Clear();
                 Snake.MoveSnakeY(value);
-                Snake.PrintSnake();
+                Snake.DisplaySnake();
                 Food.DisplayFood();
 
                 if (Snake.X == Food.X && Snake.Y == Food.Y)
