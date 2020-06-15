@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using ConsoleSnake.Exceptions;
 
 namespace ConsoleSnake
 {
@@ -7,6 +9,7 @@ namespace ConsoleSnake
     {
         // snake body
         public List<Point> SnakeBody { get; } = new List<Point>();
+        public Point Head => SnakeBody[0];
 
         // get snake length
         private int Length => SnakeBody.Count;
@@ -23,7 +26,7 @@ namespace ConsoleSnake
         // initialize snake body
         private void InitializeBody()
         {
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 10; i++)
                 SnakeBody.Add(new Point(5, 2 + i));
         }
 
@@ -45,23 +48,19 @@ namespace ConsoleSnake
 
         public void MoveSnakeX(int val)
         {
-            // remove tail element
-            SnakeBody.RemoveAt(Length - 1);
-            // get head
-            var next = SnakeBody[0];
-            // get next based on head
-            next = new Point(next.X + val, next.Y);
+            RemoveTail();
+            var next = new Point(Head.X + val, Head.Y);
+            if (!LegalMove(next))
+                throw new SnakeOverstepException("Game Over");
             SnakeBody.Insert(0, next);
         }
 
         public void MoveSnakeY(int val)
         {
-            // remove tail element
-            SnakeBody.RemoveAt(Length - 1);
-            // get head
-            var next = SnakeBody[0];
-            // get next based on head
-            next = new Point(next.X, next.Y + val);
+            RemoveTail();
+            var next = new Point(Head.X, Head.Y + val);
+            if (!LegalMove(next))
+                throw new SnakeOverstepException("Game Over");
             SnakeBody.Insert(0, next);
         }
 
@@ -77,6 +76,16 @@ namespace ConsoleSnake
             var currentTail = SnakeBody[Length - 1];
             currentTail = new Point(currentTail.X, currentTail.Y + val);
             SnakeBody.Insert(Length - 1, currentTail);
+        }
+
+        public bool LegalMove(Point point)
+        {
+            return !SnakeBody.Contains(point);
+        }
+
+        private void RemoveTail()
+        {
+            SnakeBody.RemoveAt(Length - 1);
         }
     }
 }

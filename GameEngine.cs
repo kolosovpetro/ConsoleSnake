@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using ConsoleSnake.Exceptions;
 
 namespace ConsoleSnake
 {
     internal class GameEngine
     {
         private Snake Snake { get; } = new Snake();
+        private Point Head => Snake.SnakeBody[0];
         private Food Food { get; } = new Food();
         private int PlayerCount { get; set; }
 
