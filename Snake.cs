@@ -7,7 +7,7 @@ namespace ConsoleSnake
     internal class Snake
     {
         // snake body
-        public List<Point> SnakeBody { get; } = new List<Point>();
+        public List<Point> SnakeBody { get; private set; }
         public Point Head => SnakeBody[0];
         public Point Tail => SnakeBody[Length - 1];
 
@@ -24,8 +24,9 @@ namespace ConsoleSnake
         }
 
         // initialize snake body
-        private void InitializeBody()
+        public void InitializeBody()
         {
+            SnakeBody = new List<Point>();
             for (var i = 0; i < 10; i++)
                 SnakeBody.Add(new Point(5, 2 + i));
         }
@@ -35,7 +36,7 @@ namespace ConsoleSnake
         {
             foreach (var point in SnakeBody)
             {
-                if (SnakeBody.IndexOf(point) == 0)
+                if (point == Head)
                 {
                     // this if makes head of snake to be colored
                     point.PrintPoint(ConsoleColor.DarkMagenta);

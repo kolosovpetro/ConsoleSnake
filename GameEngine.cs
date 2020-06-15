@@ -11,6 +11,7 @@ namespace ConsoleSnake
 
         public void GameProcess()
         {
+            // set resolution of console
             Console.WriteLine("Press any key to start");
             UpdateCount();
             Food.DisplayFood();
@@ -48,7 +49,18 @@ namespace ConsoleSnake
             while (!Console.KeyAvailable)
             {
                 Console.Clear();
-                Snake.MoveSnakeX(value);
+
+                try
+                {
+                    Snake.MoveSnakeX(value);    // throws snake kill itself exception
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message + "\nPress any key to play again");
+                    Snake.InitializeBody();
+                    break;
+                }
+
                 Food.DisplayFood();
                 Snake.DisplaySnake();
 
@@ -72,7 +84,18 @@ namespace ConsoleSnake
             while (!Console.KeyAvailable)
             {
                 Console.Clear();
-                Snake.MoveSnakeY(value);
+
+                try
+                {
+                    Snake.MoveSnakeY(value);    // throws snake killed itself exception
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message + "\nPress any key to play again");
+                    Snake.InitializeBody();
+                    break;
+                }
+
                 Food.DisplayFood();
                 Snake.DisplaySnake();
 
