@@ -6,6 +6,11 @@ namespace ConsoleSnake.Statistics
     [Serializable]
     internal class StatisticsEngine
     {
-        public List<Player> PlayerList { get; }
+        public List<Player> PlayerList { get; } = new List<Player>();
+
+        public void AddPlayer(Player player)
+        {
+            PlayerList.Add(player);
+        }
     }
 }
