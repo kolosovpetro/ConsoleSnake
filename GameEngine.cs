@@ -8,10 +8,10 @@ namespace ConsoleSnake
         private Snake Snake { get; } = new Snake();
         private Food Food { get; } = new Food();
         private int PlayerCount { get; set; }
+        private delegate void PerformMove(int val);
 
         public void GameProcess()
         {
-            // set resolution of console
             Console.WriteLine("Press any key to start");
             UpdateCount();
             Food.DisplayFood();
@@ -22,29 +22,35 @@ namespace ConsoleSnake
                 if (Console.KeyAvailable)
                 {
                     var command = Console.ReadKey().Key;
+                    PerformMove performMove;
                     switch (command)
                     {
                         case ConsoleKey.DownArrow:
-                            VerticalMove(1);
+                            performMove = Snake.MoveSnakeY;
+                            MoveSnake(1, performMove);
                             break;
                         case ConsoleKey.UpArrow:
-                            VerticalMove(-1);
+                            performMove = Snake.MoveSnakeY;
+                            MoveSnake(-1, performMove);
                             break;
                         case ConsoleKey.RightArrow:
-                            HorizontalMove(1);
+                            performMove = Snake.MoveSnakeX;
+                            MoveSnake(1, performMove);
                             break;
                         case ConsoleKey.LeftArrow:
-                            HorizontalMove(-1);
+                            performMove = Snake.MoveSnakeX;
+                            MoveSnake(-1, performMove);
                             break;
                         default:
-                            HorizontalMove(1);
+                            performMove = Snake.MoveSnakeX;
+                            MoveSnake(1, performMove);
                             break;
                     }
                 }
             }
         }
 
-        private void HorizontalMove(int value)
+        private void MoveSnake(int value, PerformMove performMove)
         {
             while (!Console.KeyAvailable)
             {
@@ -52,13 +58,17 @@ namespace ConsoleSnake
 
                 try
                 {
-                    Snake.MoveSnakeX(value);    // throws snake kill itself exception
+                    performMove(value);     // throws snake bite itself exception
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message + "\nPress any key to play again");
                     Snake.InitializeBody();
-                    break;
+                    Food.ChangeFoodPosition();
+                    Food.DisplayFood();
+                    Snake.DisplaySnake();
+                    Console.ReadKey();
+                    continue;
                 }
 
                 Food.DisplayFood();
@@ -79,44 +89,24 @@ namespace ConsoleSnake
             }
         }
 
-        private void VerticalMove(int value)
-        {
-            while (!Console.KeyAvailable)
-            {
-                Console.Clear();
-
-                try
-                {
-                    Snake.MoveSnakeY(value);    // throws snake killed itself exception
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message + "\nPress any key to play again");
-                    Snake.InitializeBody();
-                    break;
-                }
-
-                Food.DisplayFood();
-                Snake.DisplaySnake();
-
-                if (Snake.X == Food.X && Snake.Y == Food.Y)
-                {
-                    PlayerCount++;
-                    UpdateCount();
-                    Food.ChangeFoodPosition();
-                    // this is to check that food won't appear inside snake's body
-                    while (Snake.SnakeBody.Contains(Food.Position))
-                        Food.ChangeFoodPosition();
-                    Snake.AddTailY(value);
-                }
-
-                Thread.Sleep(150);
-            }
-        }
-
         private void UpdateCount()
         {
             Console.Title = $"Snake game. Current count: {PlayerCount}";
+        }
+
+        private string[] MainMenu()
+        {
+            return new[]
+            {
+                "1. New game",
+                "2. Options",
+                "2. Statistics"
+            };
+        }
+
+        private void DisplayMenu()
+        {
+            foreach (var item in MainMenu()) Console.WriteLine(item);
         }
     }
 }

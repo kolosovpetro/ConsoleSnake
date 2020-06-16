@@ -28,7 +28,7 @@ namespace ConsoleSnake
         {
             SnakeBody = new List<Point>();
             for (var i = 0; i < 10; i++)
-                SnakeBody.Add(new Point(5, 2 + i));
+                SnakeBody.Add(new Point(5, 15 + i));
         }
 
         // print snake

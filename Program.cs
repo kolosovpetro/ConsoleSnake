@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ConsoleSnake
+﻿namespace ConsoleSnake
 {
     internal class Program
     {
