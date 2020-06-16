@@ -9,10 +9,15 @@ namespace ConsoleSnake.Game
     {
         private Snake Snake { get; } = new Snake();
         private Food Food { get; } = new Food();
+        private static StatisticsEngine StatEngine { get; set; } = new StatisticsEngine();
         private Player CurrentPlayer { get; } = new Player();
-        private StatisticsEngine StatEngine { get; set; } = new StatisticsEngine();
         private int Difficulty { get; set; } = 150;
         private delegate void PerformMove(int val);
+
+        public GameEngine()
+        {
+            CurrentPlayer.PlayerName = StatEngine.PlayerList[^1].PlayerName;
+        }
 
         public void MainProcess()
         {
