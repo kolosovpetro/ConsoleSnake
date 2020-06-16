@@ -1,6 +1,6 @@
 ### Snake Console Game
 
-Snake game console implementation using C#
+Responsive Console Snake Game written in C#. In options it is possible to set player name and game difficulty (0-300, 0 - expert). Also, user may see player statstics. Player statistics implemented using JSON serialization.
 
 ### To implement in addition
 

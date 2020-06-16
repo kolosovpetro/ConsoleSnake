@@ -158,16 +158,6 @@ namespace ConsoleSnake.Game
             foreach (var item in Menu()) Console.WriteLine(item);
         }
 
-        public void SetDifficulty(int difficulty)
-        {
-            Difficulty = difficulty;
-        }
-
-        public void SetPlayerName(string name)
-        {
-            CurrentPlayer.SetPlayerName(name);
-        }
-
         public IEnumerable<string> OptionsMenu()
         {
             return new[]
