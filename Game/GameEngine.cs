@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Game
 {
     internal class GameEngine
     {
-        private Snake Snake { get; } = new Snake();
-        private Food Food { get; } = new Food();
+        private Snake Snake { get; set; } = new Snake();
+        private Food Food { get; set; } = new Food();
         private int PlayerCount { get; set; }
         private delegate void PerformMove(int val);
 
@@ -27,19 +27,19 @@ namespace ConsoleSnake
                     {
                         case ConsoleKey.DownArrow:
                             performMove = Snake.MoveSnakeY;
-                            MoveSnake(1, performMove);
+                            MoveSnakeSafe(1, performMove);
                             break;
                         case ConsoleKey.UpArrow:
                             performMove = Snake.MoveSnakeY;
-                            MoveSnake(-1, performMove);
+                            MoveSnakeSafe(-1, performMove);
                             break;
                         case ConsoleKey.RightArrow:
                             performMove = Snake.MoveSnakeX;
-                            MoveSnake(1, performMove);
+                            MoveSnakeSafe(1, performMove);
                             break;
                         case ConsoleKey.LeftArrow:
                             performMove = Snake.MoveSnakeX;
-                            MoveSnake(-1, performMove);
+                            MoveSnakeSafe(-1, performMove);
                             break;
                         default:
                             performMove = Snake.MoveSnakeX;
@@ -50,27 +50,29 @@ namespace ConsoleSnake
             }
         }
 
+        private void MoveSnakeSafe(int val, PerformMove performMove)
+        {
+            try
+            {
+                MoveSnake(val, performMove);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message + "\nPress any key to play again");
+                Snake.Reset();
+                Snake.DisplaySnake();
+                Food.Reset();
+                Food.DisplayFood();
+                PlayerCount = 0;
+                UpdateCount();
+            }
+        }
+
         private void MoveSnake(int value, PerformMove performMove)
         {
             while (!Console.KeyAvailable)
             {
-                Console.Clear();
-
-                try
-                {
-                    performMove(value);     // throws snake bite itself exception
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message + "\nPress any key to play again");
-                    Snake.InitializeBody();
-                    Food.ChangeFoodPosition();
-                    Food.DisplayFood();
-                    Snake.DisplaySnake();
-                    Console.ReadKey();
-                    continue;
-                }
-
+                performMove(value);     // throws snake bite itself exception
                 Food.DisplayFood();
                 Snake.DisplaySnake();
 
@@ -78,14 +80,15 @@ namespace ConsoleSnake
                 {
                     PlayerCount++;
                     UpdateCount();
-                    Food.ChangeFoodPosition();
+                    Food.Reset();
                     // this is to check that food won't appear inside snake's body
                     while (Snake.SnakeBody.Contains(Food.Position))
-                        Food.ChangeFoodPosition();
+                        Food.Reset();
                     Snake.AddTailX(value);
                 }
 
                 Thread.Sleep(150);
+                Console.Clear();
             }
         }
 

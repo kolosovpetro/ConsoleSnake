@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Game
 {
     internal class Point : IEquatable<Point>
     {

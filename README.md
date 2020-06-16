@@ -14,7 +14,11 @@ Snake game console implementation using C#
 - Implement various difficulties of snake (easy, normal, expert)
 - Implement player history and statistics (use streams or serialization)
 
+### Usecases
+
+- In the options, user should set his nickname and choose difficulty
+
 
 ### Example
 
-![Decorator diagram](/picture/snake.jpg?raw=true )
+![Decorator diagram](/Pictures/snake.jpg?raw=true )

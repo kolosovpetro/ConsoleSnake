@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ConsoleSnake.Game;
 using NUnit.Framework;
 
 namespace ConsoleSnake.UnitTests

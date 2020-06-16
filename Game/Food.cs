@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Game
 {
     internal class Food
     {
@@ -16,7 +16,7 @@ namespace ConsoleSnake
 
         public Food()
         {
-            ChangeFoodPosition();
+            Reset();
         }
 
         // Generate new coordinates for food
@@ -28,7 +28,7 @@ namespace ConsoleSnake
         }
 
         // set new coordinates
-        public void ChangeFoodPosition()
+        public void Reset()
         {
             Position.X = GenerateCoordinates().Item1;
             Position.Y = GenerateCoordinates().Item2;

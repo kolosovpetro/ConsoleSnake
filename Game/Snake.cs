@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ConsoleSnake.Exceptions;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Game
 {
     internal class Snake
     {
@@ -20,11 +20,11 @@ namespace ConsoleSnake
 
         public Snake()
         {
-            InitializeBody();
+            Reset();
         }
 
         // initialize snake body
-        public void InitializeBody()
+        public void Reset()
         {
             SnakeBody = new List<Point>();
             for (var i = 0; i < 10; i++)

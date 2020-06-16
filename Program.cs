@@ -1,4 +1,6 @@
-﻿namespace ConsoleSnake
+﻿using ConsoleSnake.Game;
+
+namespace ConsoleSnake
 {
     internal class Program
     {
