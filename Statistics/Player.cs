@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleSnake.Statistics
 {
-    class Player
+    [Serializable]
+    internal class Player
     {
         public string PlayerName { get; set; }
         public List<int> Results { get; }

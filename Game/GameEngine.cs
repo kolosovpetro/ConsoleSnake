@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ConsoleSnake.Game
 {
     internal class GameEngine
     {
-        private Snake Snake { get; set; } = new Snake();
-        private Food Food { get; set; } = new Food();
+        private Snake Snake { get; } = new Snake();
+        private Food Food { get; } = new Food();
         private int PlayerCount { get; set; }
         private delegate void PerformMove(int val);
 
@@ -56,9 +57,10 @@ namespace ConsoleSnake.Game
             {
                 MoveSnake(val, performMove);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message + "\nPress any key to play again");
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("Game over. Press any key to play again");
                 Snake.Reset();
                 Snake.DisplaySnake();
                 Food.Reset();
@@ -84,7 +86,7 @@ namespace ConsoleSnake.Game
                     // this is to check that food won't appear inside snake's body
                     while (Snake.SnakeBody.Contains(Food.Position))
                         Food.Reset();
-                    Snake.AddTailX(value);
+                    Snake.AddTail(value);
                 }
 
                 Thread.Sleep(150);
@@ -97,7 +99,7 @@ namespace ConsoleSnake.Game
             Console.Title = $"Snake game. Current count: {PlayerCount}";
         }
 
-        private string[] MainMenu()
+        private static IEnumerable<string> MainMenu()
         {
             return new[]
             {

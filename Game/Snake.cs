@@ -52,7 +52,7 @@ namespace ConsoleSnake.Game
             RemoveTail();
             var next = new Point(Head.X + val, Head.Y);
             if (!LegalMove(next))
-                throw new SnakeOverstepException("Game Over");
+                throw new SnakeException("Game Over");
             SnakeBody.Insert(0, next);
         }
 
@@ -61,7 +61,7 @@ namespace ConsoleSnake.Game
             RemoveTail();
             var next = new Point(Head.X, Head.Y + val);
             if (!LegalMove(next))
-                throw new SnakeOverstepException("Game Over");
+                throw new SnakeException("Game Over");
             SnakeBody.Insert(0, next);
         }
 
@@ -70,15 +70,9 @@ namespace ConsoleSnake.Game
             SnakeBody.RemoveAt(Length - 1);
         }
 
-        public void AddTailX(int val)
+        public void AddTail(int val)
         {
             var tail = new Point(Tail.X + val, Tail.Y);
-            SnakeBody.Insert(Length - 1, tail);
-        }
-
-        public void AddTailY(int val)
-        {
-            var tail = new Point(Tail.X, Tail.Y + val);
             SnakeBody.Insert(Length - 1, tail);
         }
 
