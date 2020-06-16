@@ -8,15 +8,10 @@ namespace ConsoleSnake.Game
     {
         // snake body
         public List<Point> SnakeBody { get; private set; }
-        public Point Head => SnakeBody[0];
-        public Point Tail => SnakeBody[Length - 1];
-
         // get snake length
         private int Length => SnakeBody.Count;
-
-        // get head coordinates
-        public int X => SnakeBody[0].X;
-        public int Y => SnakeBody[0].Y;
+        public Point Head => SnakeBody[0];
+        public Point Tail => SnakeBody[Length - 1];
 
         public Snake()
         {

@@ -78,7 +78,7 @@ namespace ConsoleSnake.Game
                 Food.DisplayFood();
                 Snake.DisplaySnake();
 
-                if (Snake.X == Food.X && Snake.Y == Food.Y)
+                if (Snake.Head.Equals(Food.Position))
                 {
                     PlayerCount++;
                     UpdateCount();

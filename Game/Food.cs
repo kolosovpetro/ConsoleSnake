@@ -10,28 +10,16 @@ namespace ConsoleSnake.Game
         // random instance
         private Random Random { get; } = new Random();
 
-        // get coordinates
-        public int X => Position.X;
-        public int Y => Position.Y;
-
         public Food()
         {
             Reset();
         }
 
-        // Generate new coordinates for food
-        private (int, int) GenerateCoordinates()
-        {
-            var newX = Random.Next(20);
-            var newY = Random.Next(20);
-            return new ValueTuple<int, int>(newX, newY);
-        }
-
         // set new coordinates
         public void Reset()
         {
-            Position.X = GenerateCoordinates().Item1;
-            Position.Y = GenerateCoordinates().Item2;
+            Position.X = Random.Next(30);
+            Position.Y = Random.Next(20);
         }
 
         // display food
