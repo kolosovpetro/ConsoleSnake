@@ -15,21 +15,46 @@ namespace ConsoleSnake.Game
         private int Difficulty { get; set; } = 150;
         private delegate void PerformMove(int val);
 
+        public void MainProcess()
+        {
+            DisplayMenu();
+            var menuCommand = new ConsoleKey();
+            while (menuCommand != ConsoleKey.D4)
+            {
+                menuCommand = Console.ReadKey().Key;
+                switch (menuCommand)
+                {
+                    case ConsoleKey.D1:
+                        // new game
+                        break;
+                    case ConsoleKey.D2:
+                        // options
+                        break;
+                    case ConsoleKey.D3:
+                        // statistics
+                        break;
+                    case ConsoleKey.D4:
+                        // exit
+                        break;
+                }
+            }
+        }
+
         public void GameProcess()
         {
             Console.WriteLine("Press any key to start... or X to quit");
             UpdateTitle();
             Food.DisplayFood();
             Snake.DisplaySnake();
-            var command = new ConsoleKey();
+            var gameCommand = new ConsoleKey();
 
-            while (command != ConsoleKey.X)
+            while (gameCommand != ConsoleKey.X)
             {
                 if (Console.KeyAvailable)
                 {
-                    command = Console.ReadKey().Key;
+                    gameCommand = Console.ReadKey().Key;
                     PerformMove performMove;
-                    switch (command)
+                    switch (gameCommand)
                     {
                         case ConsoleKey.DownArrow:
                             performMove = Snake.MoveSnakeY;
@@ -48,7 +73,7 @@ namespace ConsoleSnake.Game
                             MoveSnake(-1, performMove);
                             break;
                         case ConsoleKey.X:
-                            command = ConsoleKey.X;
+                            gameCommand = ConsoleKey.X;
                             break;
                         default:
                             performMove = Snake.MoveSnakeX;
@@ -102,7 +127,7 @@ namespace ConsoleSnake.Game
             Console.Title = $"Snake game. Current count: {PlayerCount}";
         }
 
-        private static IEnumerable<string> MainMenu()
+        private static IEnumerable<string> Menu()
         {
             return new[]
             {
@@ -114,7 +139,7 @@ namespace ConsoleSnake.Game
 
         private void DisplayMenu()
         {
-            foreach (var item in MainMenu()) Console.WriteLine(item);
+            foreach (var item in Menu()) Console.WriteLine(item);
         }
 
         public void SetDifficulty(int difficulty)
@@ -125,6 +150,16 @@ namespace ConsoleSnake.Game
         public void SetPlayerName(string name)
         {
             CurrentPlayer.SetPlayerName(name);
+        }
+
+        public void GameOptions()
+        {
+
+        }
+
+        public void GameStatistics()
+        {
+            foreach (var player in StatEngine.PlayerList) Console.WriteLine(player);
         }
     }
 }

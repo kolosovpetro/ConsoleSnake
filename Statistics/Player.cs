@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ConsoleSnake.Statistics
 {
@@ -7,11 +8,11 @@ namespace ConsoleSnake.Statistics
     internal class Player
     {
         public string PlayerName { get; private set; }
-        public List<int> Results { get; }
+        public List<int> GameResults { get; }
 
         public Player()
         {
-            Results = new List<int>();
+            GameResults = new List<int>();
             PlayerName = "DefaultName";
         }
 
@@ -22,7 +23,14 @@ namespace ConsoleSnake.Statistics
 
         public void AddResult(int result)
         {
-            Results.Add(result);
+            // if player name not in list - ADD
+            // if player name in list - merge results
+            GameResults.Add(result);
+        }
+
+        public override string ToString()
+        {
+            return $"Player name: {PlayerName}, Total games: {GameResults}, Best score: {GameResults.Max()}";
         }
     }
 }
