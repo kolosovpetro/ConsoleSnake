@@ -17,10 +17,10 @@ namespace ConsoleSnake.Game
 
         public void MainProcess()
         {
-            DisplayMenu();
             var menuCommand = new ConsoleKey();
             while (menuCommand != ConsoleKey.D4)
             {
+                DisplayMenu();
                 menuCommand = Console.ReadKey().Key;
                 switch (menuCommand)
                 {
@@ -28,7 +28,8 @@ namespace ConsoleSnake.Game
                         // new game
                         break;
                     case ConsoleKey.D2:
-                        // options
+                        Console.Clear();
+                        GameOptions();
                         break;
                     case ConsoleKey.D3:
                         // statistics
@@ -152,9 +153,39 @@ namespace ConsoleSnake.Game
             CurrentPlayer.SetPlayerName(name);
         }
 
+        public IEnumerable<string> OptionsMenu()
+        {
+            return new[]
+            {
+                "1. Change player name",
+                "2. Change difficulty"
+            };
+        }
+
+        public void DisplayOptionsMenu()
+        {
+            foreach (var option in OptionsMenu()) Console.WriteLine(option);
+        }
+
         public void GameOptions()
         {
-
+            DisplayOptionsMenu();
+            var userCommand = Console.ReadKey().Key;
+            switch (userCommand)
+            {
+                case ConsoleKey.D1:
+                    Console.Clear();
+                    Console.WriteLine("Set new player name");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+                case ConsoleKey.D2:
+                    Console.Clear();
+                    Console.WriteLine("Set difficulty: 0 - 300");
+                    Console.ReadKey();
+                    Console.Clear();
+                    break;
+            }
         }
 
         public void GameStatistics()
