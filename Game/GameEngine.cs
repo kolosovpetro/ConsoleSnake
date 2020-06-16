@@ -22,22 +22,27 @@ namespace ConsoleSnake.Game
             {
                 DisplayMenu();
                 menuCommand = Console.ReadKey().Key;
+
                 switch (menuCommand)
                 {
                     case ConsoleKey.D1:
-                        // new game
+                        Console.Clear();
+                        GameProcess();
                         break;
                     case ConsoleKey.D2:
                         Console.Clear();
                         GameOptions();
                         break;
                     case ConsoleKey.D3:
-                        // statistics
+                        Console.Clear();
+                        GameStatistics();
                         break;
                     case ConsoleKey.D4:
-                        // exit
+                        menuCommand = ConsoleKey.D4;
                         break;
                 }
+
+                Console.Clear();
             }
         }
 
@@ -114,10 +119,16 @@ namespace ConsoleSnake.Game
             {
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine("Game over. Press any key to play again");
+                // save player result
+                CurrentPlayer.AddResult(PlayerCount);
+                StatEngine.AddPlayer(CurrentPlayer);
+                StatEngine.Serialize();
+                // reset snake position and food position
                 Snake.Reset();
                 Snake.DisplaySnake();
                 Food.Reset();
                 Food.DisplayFood();
+                // reset player count and update title
                 PlayerCount = 0;
                 UpdateTitle();
             }
@@ -125,7 +136,7 @@ namespace ConsoleSnake.Game
 
         private void UpdateTitle()
         {
-            Console.Title = $"Snake game. Current count: {PlayerCount}";
+            Console.Title = $"Player name: {CurrentPlayer.PlayerName}. Current count: {PlayerCount}";
         }
 
         private static IEnumerable<string> Menu()
@@ -134,7 +145,8 @@ namespace ConsoleSnake.Game
             {
                 "1. New game",
                 "2. Options",
-                "2. Statistics"
+                "3. Statistics",
+                "4. Exit"
             };
         }
 
@@ -191,6 +203,7 @@ namespace ConsoleSnake.Game
         public void GameStatistics()
         {
             foreach (var player in StatEngine.PlayerList) Console.WriteLine(player);
+            Console.ReadKey();
         }
     }
 }

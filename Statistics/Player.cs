@@ -23,14 +23,12 @@ namespace ConsoleSnake.Statistics
 
         public void AddResult(int result)
         {
-            // if player name not in list - ADD
-            // if player name in list - merge results
             GameResults.Add(result);
         }
 
         public override string ToString()
         {
-            return $"Player name: {PlayerName}, Total games: {GameResults}, Best score: {GameResults.Max()}";
+            return $"Player name: {PlayerName}, Total games: {GameResults.Count}, Best score: {GameResults.Max()}";
         }
     }
 }

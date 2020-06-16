@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace ConsoleSnake.Statistics
 {
     [Serializable]
     internal class StatisticsEngine
     {
-        public List<Player> PlayerList { get; } = new List<Player>();
+        public List<Player> PlayerList { get; private set; } = new List<Player>();
+        private string FilePath { get; } = "../../../Statistics/stats.json";
+
+        public StatisticsEngine()
+        {
+            Deserialize();
+        }
 
         public void AddPlayer(Player player)
         {
@@ -22,12 +30,27 @@ namespace ConsoleSnake.Statistics
 
         public void Serialize()
         {
+            // serialize JSON to a string and then write string to a file
+            File.WriteAllText(FilePath, JsonConvert.SerializeObject(PlayerList));
 
+            // serialize JSON directly to a file
+            using var file = File.CreateText(FilePath);
+            var serializer = new JsonSerializer();
+            serializer.Serialize(file, PlayerList);
         }
 
-        public StatisticsEngine Deserialize()
+        public void Deserialize()
         {
-            return null;
+            try
+            {
+                using var file = File.OpenText(FilePath);
+                var serializer = new JsonSerializer();
+                PlayerList = (List<Player>)serializer.Deserialize(file, typeof(List<Player>));
+            }
+            catch (Exception)
+            {
+                PlayerList = new List<Player>();
+            }
         }
     }
 }
