@@ -5,7 +5,7 @@ namespace ConsoleSnake.Statistics
     [Serializable]
     internal class Player
     {
-        public string PlayerName { get; private set; }
+        public string PlayerName { get; set; }
         public int Score { get; set; }
 
         public Player()

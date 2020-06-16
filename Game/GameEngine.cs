@@ -185,14 +185,18 @@ namespace ConsoleSnake.Game
             {
                 case ConsoleKey.D1:
                     Console.Clear();
+                    Console.WriteLine($"Current player name: {CurrentPlayer.PlayerName}");
                     Console.WriteLine("Set new player name");
-                    Console.ReadKey();
+                    var playerName = Console.ReadLine();
+                    CurrentPlayer.SetPlayerName(playerName);
                     Console.Clear();
                     break;
                 case ConsoleKey.D2:
                     Console.Clear();
-                    Console.WriteLine("Set difficulty: 0 - 300");
-                    Console.ReadKey();
+                    Console.WriteLine($"Current difficulty: {Difficulty}");
+                    Console.WriteLine("Set new difficulty: 0 - 300");
+                    var difficulty = int.Parse(Console.ReadLine() ?? throw new InvalidOperationException());
+                    Difficulty = difficulty;
                     Console.Clear();
                     break;
             }
