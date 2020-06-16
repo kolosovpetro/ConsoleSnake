@@ -10,8 +10,7 @@ namespace ConsoleSnake.Game
         private Snake Snake { get; } = new Snake();
         private Food Food { get; } = new Food();
         private Player CurrentPlayer { get; } = new Player();
-        private StatisticsEngine StatEngine { get; } = new StatisticsEngine();
-        private int PlayerCount { get; set; }
+        private StatisticsEngine StatEngine { get; set; } = new StatisticsEngine();
         private int Difficulty { get; set; } = 150;
         private delegate void PerformMove(int val);
 
@@ -102,7 +101,7 @@ namespace ConsoleSnake.Game
 
                     if (Snake.Head.Equals(Food.Position))
                     {
-                        PlayerCount++;
+                        CurrentPlayer.Score++;
                         UpdateTitle();
                         Food.Reset();
                         // this is to check that food won't appear inside snake's body
@@ -120,7 +119,6 @@ namespace ConsoleSnake.Game
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine("Game over. Press any key to play again");
                 // save player result
-                CurrentPlayer.AddResult(PlayerCount);
                 StatEngine.AddPlayer(CurrentPlayer);
                 StatEngine.Serialize();
                 // reset snake position and food position
@@ -129,14 +127,14 @@ namespace ConsoleSnake.Game
                 Food.Reset();
                 Food.DisplayFood();
                 // reset player count and update title
-                PlayerCount = 0;
+                CurrentPlayer.Score = 0;
                 UpdateTitle();
             }
         }
 
         private void UpdateTitle()
         {
-            Console.Title = $"Player name: {CurrentPlayer.PlayerName}. Current count: {PlayerCount}";
+            Console.Title = $"Player name: {CurrentPlayer.PlayerName}. Current count: {CurrentPlayer.Score}";
         }
 
         private static IEnumerable<string> Menu()
@@ -150,7 +148,7 @@ namespace ConsoleSnake.Game
             };
         }
 
-        private void DisplayMenu()
+        private static void DisplayMenu()
         {
             foreach (var item in Menu()) Console.WriteLine(item);
         }
@@ -202,6 +200,7 @@ namespace ConsoleSnake.Game
 
         public void GameStatistics()
         {
+            StatEngine = new StatisticsEngine();
             foreach (var player in StatEngine.PlayerList) Console.WriteLine(player);
             Console.ReadKey();
         }
