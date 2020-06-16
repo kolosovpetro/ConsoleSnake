@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ConsoleSnake.Statistics
 {
     [Serializable]
-    internal class Player : IEquatable<Player>
+    internal class Player
     {
         public string PlayerName { get; private set; }
         public List<int> Results { get; }
@@ -12,6 +12,7 @@ namespace ConsoleSnake.Statistics
         public Player()
         {
             Results = new List<int>();
+            PlayerName = "DefaultName";
         }
 
         public void SetPlayerName(string name)
@@ -19,25 +20,9 @@ namespace ConsoleSnake.Statistics
             PlayerName = name;
         }
 
-
-        public bool Equals(Player other)
+        public void AddResult(int result)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return PlayerName == other.PlayerName && Equals(Results, other.Results);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Player)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(PlayerName, Results);
+            Results.Add(result);
         }
     }
 }

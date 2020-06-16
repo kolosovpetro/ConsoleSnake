@@ -12,5 +12,22 @@ namespace ConsoleSnake.Statistics
         {
             PlayerList.Add(player);
         }
+
+        // to show current player name in options
+        public Player GetCurrentPlayer()
+        {
+            int length = PlayerList.Count;
+            return PlayerList[length - 1];
+        }
+
+        public void Serialize()
+        {
+
+        }
+
+        public StatisticsEngine Deserialize()
+        {
+            return null;
+        }
     }
 }
