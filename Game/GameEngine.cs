@@ -127,10 +127,10 @@ namespace ConsoleSnake.Game
                 StatEngine.AddPlayer(CurrentPlayer);
                 StatEngine.Serialize();
                 // reset snake position and food position
-                Snake.Reset();
-                Snake.DisplaySnake();
                 Food.Reset();
                 Food.DisplayFood();
+                Snake.Reset();
+                Snake.DisplaySnake();
                 // reset player count and update title
                 CurrentPlayer.Score = 0;
                 UpdateTitle();
